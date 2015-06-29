@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<workflow name="test">
+       <process id="main">
+		<service name="feeder-list" id="feeder1">
+			<output process='url'/>
+		</service>
+	</process> 
+	<process id="url">
+                <service name='thug' id='thug1'>
+			<parameter name="save_js_context">true</parameter>
+		</service>
+		<service name="reporter" id="reporter1">
+			<parameter name="serviceName">thug</parameter>
+			<parameter name="template">thug.jsont</parameter>
+		</service>
+		<service name="reporter" id="reporter2">
+                        <parameter name="serviceName"/>
+                        <parameter name="template">url.jsont</parameter>
+                </service>
+        </process>
+</workflow>
+

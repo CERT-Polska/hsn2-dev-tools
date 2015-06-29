@@ -1,0 +1,70 @@
+<?xml version="1.0"?>
+<workflow>
+	<description>
+		This workflow illustrates basic services of Honeyspider Network: webclient and JavaScript Static Analyzer.
+	</description>
+  <process id="main">
+    <service name="feeder-list" id="feeder">
+      <parameter name="uri">file.txt</parameter>
+      <parameter name="domain_info">true</parameter>
+      <output process="process_url"/>
+    </service>
+  </process>
+  <process id="process_url">
+    <service name="webclient" id="webclient0" ignore_errors="DEFUNCT">
+      <parameter name="link_click_policy">0</parameter>
+      <parameter name="redirect_limit">20</parameter>
+      <output process="report" expr="type==&quot;url&quot;"/>
+    </service>
+    <service name="reporter" id="reporter1">
+      <parameter name="serviceName">webclient</parameter>
+      <parameter name="template">webclient.jsont</parameter>
+    </service>
+    <conditional expr="js_context_list != null">
+      <true>
+        <service name="js-sta" id="javascript0"/>
+        <service name="reporter" id="reporter2" ignore_errors="INPUT">
+          <parameter name="serviceName">js-sta</parameter>
+          <parameter name="template">js-sta.jsont</parameter>
+        </service>
+      </true>
+    </conditional>
+    <!-- determine classification, 
+          taking into account propagation from child objects -->
+    <script>!findByValue("parent", #current).
+                {? #this.origin != "link" and #this.classification == "malicious"}.isEmpty
+                       or js_classification == "malicious"
+                       ? (classification = "malicious") : 
+                             (classification = "benign")</script>
+    <service name="reporter" id="reporter4">
+      <parameter name="serviceName"/>
+      <parameter name="template">url.jsont</parameter>
+    </service>
+  </process>
+  <process id="report">
+    <service name="reporter" id="reporter1">
+      <parameter name="serviceName">webclient</parameter>
+      <parameter name="template">webclient.jsont</parameter>
+    </service>
+    <conditional expr="js_context_list != null">
+      <true>
+        <service name="js-sta" id="javascript0"/>
+        <service name="reporter" id="reporter2" ignore_errors="INPUT">
+          <parameter name="serviceName">js-sta</parameter>
+          <parameter name="template">js-sta.jsont</parameter>
+        </service>
+      </true>
+    </conditional>
+    <!-- determine classification, 
+          taking into account propagation from child objects -->
+    <script>!findByValue("parent", #current).
+                {? #this.origin != "link" and #this.classification == "malicious"}.isEmpty
+                       or js_classification == "malicious"
+                       ? (classification = "malicious") : 
+                             (classification = "benign")</script>
+    <service name="reporter" id="reporter4">
+      <parameter name="serviceName"/>
+      <parameter name="template">url.jsont</parameter>
+    </service>
+  </process>
+</workflow>
