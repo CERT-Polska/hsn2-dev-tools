@@ -1,0 +1,14 @@
+diff -crB pika01/adapters/blocking_connection.py pika02/adapters/blocking_connection.py
+*** pika/adapters/blocking_connection.py	2012-09-17 11:11:05.519260411 +0200
+--- pika/adapters/blocking_connection.py	2012-09-17 11:12:46.795262316 +0200
+***************
+*** 14,19 ****
+--- 14,21 ----
+  from pika.channel import Channel, ChannelTransport
+  from pika.exceptions import AMQPConnectionError, AMQPChannelError
+  
++ import pika.log as log
++ 
+  SOCKET_TIMEOUT = 1
+  SOCKET_TIMEOUT_THRESHOLD = 100
+  SOCKET_TIMEOUT_MESSAGE = "BlockingConnection: Timeout exceeded, disconnected"

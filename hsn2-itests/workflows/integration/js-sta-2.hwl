@@ -1,0 +1,12 @@
+<?xml version="1.0"?>
+<workflow name="js-sta-2">
+	<process id="main">
+		<service name="object-feeder" id="feed">
+			<parameter name="uri">file.txt</parameter>
+			<output process="jsproc"/>
+		</service>
+	</process>
+	<process id="jsproc">
+		<service name="js-sta" id="js-sta0" />
+	</process>
+</workflow>

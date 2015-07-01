@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<workflow name='reporter-swf-cve'>
+	<process id="main">
+		<service name="object-feeder" id="feed">
+			<parameter name="uri">file.txt</parameter>
+			<output process="report"/>
+		</service>
+	</process>
+	<process id="report">
+		<service name="swf-cve" id="swf-cve0" />
+		<service name="reporter">
+			<parameter name="serviceName">swf-cve</parameter>
+			<parameter name="template">swf-cve.jsont</parameter>
+		</service>
+	</process>
+</workflow>

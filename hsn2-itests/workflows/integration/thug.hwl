@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+<workflow name='thug'>
+	<process id="main">
+		<service name="feeder-list" id="feed">
+			<parameter name="uri">file.txt</parameter>
+			<output process="thugproc"/>
+		</service>
+	</process>
+	<process id="thugproc">
+		<service name="thug" id="thug1">
+			<parameter name="useragent"></parameter>
+			<parameter name="proxy"></parameter>
+			<parameter name="verbose">True</parameter>
+			<parameter name="debug">False</parameter>
+			<parameter name="save_zip">False</parameter>
+			<parameter name="save_js_context">True</parameter>
+		</service>
+		<!--<service name="reporter">
+			<parameter name="serviceName">Thug</parameter>
+			<parameter name="template">thug.jsont</parameter>
+		</service>-->
+	</process>
+</workflow>

@@ -1,0 +1,9 @@
+# Default configuration file for HSN2 Console Tool
+
+[core]
+timeout={TIMEOUT}
+mq=rabbitmq
+
+[rabbitmq]
+server={HOST}
+port={PORT}

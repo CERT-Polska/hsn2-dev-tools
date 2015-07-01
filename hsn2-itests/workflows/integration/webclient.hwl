@@ -1,0 +1,12 @@
+<?xml version="1.0"?>
+<workflow name='webclient'>
+	<process id="main">
+		<service name="object-feeder" id="feed">
+			<parameter name="uri">file.txt</parameter>
+			<output process="webclientproc"/>
+		</service>
+	</process>
+	<process id="webclientproc">
+		<service name="webclient" id="webclient0" />
+	</process>
+</workflow>

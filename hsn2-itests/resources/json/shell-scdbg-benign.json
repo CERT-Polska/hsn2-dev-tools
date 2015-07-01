@@ -1,0 +1,13 @@
+{
+	"attrs":[
+		{
+			"name":"content",
+			"type":"BYTES",
+			"data_bytes":{
+				"key":"/tmp/tests/resources/files/standard.doc",
+				"store":0
+			}
+		}
+	],
+	"id":1
+}

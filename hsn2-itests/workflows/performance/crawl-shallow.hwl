@@ -1,0 +1,88 @@
+<?xml version='1.0'?>
+<workflow name='crawl-shallow'>
+	<description>
+		* recursive crawl, only web pages linked from the initial ones are visited
+		* all files linked from and embedded in visited web pages are analyzed
+		* URLs extracted from binaries are always visited, regardless of their depth
+		* standard set of analyzers, no high-interactive honeypots used
+		* classification is propagated backwards (from child objects to parents), except for links
+	</description>
+
+	<process id='main'>
+		<service name='feeder-list' id='feeder'>
+			<parameter name='uri'>uri_list.txt</parameter>
+			<output process='url'/>
+		</service>
+	</process>
+
+	<process id='url'>
+		<service name='norm-url' />
+
+		<!-- this expression defines the stop condition for crawling -->
+		<conditional expr='depth &lt; 2 or parent.type == "file"'>
+			<true>
+				<service name='webclient' id='webclient'>
+					<parameter name='link_limit'>200</parameter>
+					<parameter name='redirect_limit'>50</parameter>
+					<parameter name='link_click_policy'>1</parameter>
+					<output process='url' expr='type == "url"'/>
+					<output process='file' expr='type == "pdf" or type == "swf"'/>
+				</service>
+				<service name='reporter'>
+					<parameter name='serviceName'>webclient</parameter>
+					<parameter name='template'>webclient.jsont</parameter>
+				</service>
+				<!-- javascript analysis is skipped for non-pages -->
+				<conditional expr='js_context_list != null'>
+					<true>
+						<service name='js-sta' />
+						<service name='reporter'>
+							<parameter name='serviceName'>js-sta</parameter>
+							<parameter name='template'>js-sta.jsont</parameter>
+						</service>
+					</true>
+				</conditional>
+				<wait />
+				<!-- determine classification, taking into account propagation from child objects -->
+				<script>
+					!findByValue("parent", #current).{? #this.origin != "link" and #this.classification == "malicious"}.isEmpty
+					or js_classification == "malicious"
+					? (classification = "malicious") : (classification = "benign")
+				</script>
+				<service name='reporter'>
+					<parameter name='serviceName'></parameter>
+					<parameter name='template'>url.jsont</parameter>
+				</service>
+			</true>
+		</conditional>
+	</process>
+
+	<process id='file'> <!-- this process handles both PDF and Flash files -->
+		<service name='shell-scdbg'>
+			<output process='url' /> <!-- this service is able to extract links -->
+		</service>
+		<service name='reporter'>
+			<parameter name='serviceName'>shell-scdbg</parameter>
+			<parameter name='template'>shell-scdbg.jsont</parameter>
+		</service>
+		<conditional expr='type == "swf"'>
+			<true>
+				<service name='swf-cve' />
+				<service name='reporter'>
+					<parameter name='serviceName'>swf-cve</parameter>
+					<parameter name='template'>swf-cve.jsont</parameter>
+				</service>
+			</true>
+		</conditional>
+		<!-- determine classification -->
+		<script>
+			scdbg_offsets &gt; 0 or swf_cve_detected &gt; 0
+			? (classification = "malicious") : (classification = "benign")
+		</script>
+		<service name='reporter'>
+			<parameter name='serviceName'></parameter>
+			<parameter name='template'>file.jsont</parameter>
+		</service>
+	</process>
+</workflow>
+

@@ -1,0 +1,74 @@
+<?xml version="1.0"?>
+<workflow name='nuggetComplex'>
+	<process id="main">
+		<service name="feeder-list" id="feeder1">
+			<parameter name="uri">file.txt</parameter>
+			<parameter name="domain_info">true</parameter>
+			<output process="process_url" />
+		</service>
+	</process>
+	<process id="process_url">
+		<service name="webclient" id="crawler0">
+			<parameter name="link_limit">10</parameter>
+			<parameter name="redirect_limit">10</parameter>
+			<output process="nugproc" />
+		</service>
+		<service name="reporter">
+			<parameter name="serviceName">webclient</parameter>
+			<parameter name="template">webclient.jsont</parameter>
+		</service>
+		<service name="reporter">
+			<parameter name="serviceName"></parameter>
+			<parameter name="template">url-no-related-files.jsont</parameter>
+		</service>
+	</process>
+	<process id="nugproc">
+		<conditional expr="type == &quot;undefined&quot; || ! #this.containsKey('type')">
+			<true>
+				<service name="mime-recognizer"/>
+			</true>
+		</conditional>
+		<service name="reporter">
+			<parameter name="serviceName"></parameter>
+			<parameter name="template">file.jsont</parameter>
+		</service>
+		<conditional expr="type == &quot;swf&quot;">
+			<true>
+				<service name="rb-swfscanner"/>
+				<service name="reporter">
+					<parameter name="serviceName">swfScanner</parameter>
+					<parameter name="template">swfScanner.jsont</parameter>
+				</service>
+			</true>
+		</conditional>
+		<conditional expr="type == &quot;pdf&quot;">
+			<true>
+				<service name="rb-pdffox"/>
+				<service name="reporter">
+					<parameter name="serviceName">pdfFox</parameter>
+					<parameter name="template">pdfFox.jsont</parameter>
+				</service>
+			</true>
+		</conditional>
+		<conditional expr="type != &quot;pdf&quot; &amp;&amp; type != &quot;swf&quot;">
+			<true>
+				<service name="rb-clamavnugget"/>
+				<service name="reporter">
+					<parameter name="serviceName">clamavNugget</parameter>
+					<parameter name="template">clamavNugget.jsont</parameter>
+				</service>
+			</true>
+		</conditional>
+		<conditional expr="type == &quot;tar&quot;">
+			<true>
+				<service name="rb-archiveinflate">
+					<output process="nugproc"/>
+				</service>
+				<service name="reporter">
+					<parameter name="serviceName">archiveInflate</parameter>
+					<parameter name="template">archiveInflate.jsont</parameter>
+				</service>
+			</true>
+		</conditional>
+	</process>
+</workflow>

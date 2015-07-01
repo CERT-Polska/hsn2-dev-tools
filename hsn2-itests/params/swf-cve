@@ -1,0 +1,3 @@
+-connector 127.0.0.1 \
+-dataStore http://localhost:8080 \
+-plugins /opt/hsn2/swf-cve/plugins

@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+<workflow name="js-sta-1">
+	<process id="main">
+		<service name="feeder-list" id="feeder1">
+			<parameter name="uri">/tmp/tests/file.txt</parameter>
+			<parameter name="domain_info">true</parameter>
+			<output process="process_url" />
+		</service>
+		<wait />
+	</process>
+	<process id="process_url">
+		<service name="webclient" id="crawler0">
+			<output process="process_url" />
+		</service>
+		<service name="reporter">
+			<parameter name="serviceName">webclient</parameter>
+			<parameter name="template">webclient.jsont</parameter>
+		</service>
+		<conditional expr="findByName(&quot;js_context_list&quot;).isEmpty()">
+			<false>
+				<service name="js-sta" id="js-sta0" />
+				<service name="reporter">
+					<parameter name="serviceName">js-sta</parameter>
+					<parameter name="template">js-sta.jsont</parameter>
+				</service>
+			</false>
+		</conditional>
+	</process>
+</workflow>
+

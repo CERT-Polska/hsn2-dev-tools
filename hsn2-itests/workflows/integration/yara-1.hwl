@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<workflow name='yara-1'>
+	<process id="main">
+		<service name="object-feeder" id="feed">
+			<parameter name="uri">file.txt</parameter>
+			<output process="yaraproc"/>
+		</service>
+	</process>
+	<process id="yaraproc">
+		<service name="yara" id="yara1"/>
+		<!--<service name="reporter">
+			<parameter name="serviceName">yara</parameter>
+			<parameter name="template">yara.jsont</parameter>
+		</service>-->
+	</process>
+</workflow>

@@ -1,0 +1,12 @@
+<?xml version="1.0"?>
+<workflow name="shell-scdbg-1">
+	<process id="main">
+		<service name="object-feeder" id="feed">
+			<parameter name="uri">file.txt</parameter>
+			<output process="shellcodeproc"/>
+		</service>
+	</process>
+	<process id="shellcodeproc">
+		<service name="shell-scdbg" id="shell-scdbg0" />
+	</process>
+</workflow>
