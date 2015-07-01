@@ -1,0 +1,18 @@
+{
+    "attrs":[
+        {
+            "name":"content",
+            "type":"BYTES",
+            "data_bytes":{
+                "key":"/tmp/tests/resources/files/standard.doc",
+                "store":0
+            }
+        },
+        {
+            "name":"type",
+            "type":"STRING",
+            "data_string":"pdf"
+        }
+    ],
+    "id":49
+}

@@ -1,0 +1,33 @@
+<?xml version="1.0"?>
+<workflow name="incorrect">
+	<process id="main">
+		<service name="feeder-list">
+			<parameter name="path">file.txt</parameter>
+			<parameter name="limit">100</parameter>
+			<output process="process_url" />
+		</service>
+	</process>
+	<process id="process_url">
+		<conditional expr="this.depth > 9">
+			<true/>
+			<false>
+				<service name="webclient">
+					<parameter name="download">HTML</parameter>
+					<output process="process_url" />
+				</service>
+				<service name="reporter">
+					<parameter name="serviceName">webclient</parameter>
+					<parameter name="template">webclient.jsont</parameter>
+				</service>
+				<parallel>
+					<thread>
+						<service name="js-sta" id="js-sta0" />
+					</thread>
+					<thread>
+						<service name="swf-cve" id="swf-cve0" />
+					</thread>
+				</parallel>
+			</false>
+		</conditional>
+	</process>
+</workflow>

@@ -1,0 +1,2 @@
+--connector 127.0.0.1 \
+--maxThreads 10

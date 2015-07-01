@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<workflow name='cuckoo'>
+	<process id="main">
+		<service name="feeder-list" id="feed">
+			<parameter name="uri">file.txt</parameter>
+			<output process="cuckooproc"/>
+		</service>
+	</process>
+	<process id="cuckooproc">
+		<service name="cuckoo" id="cuckoo1">
+			<parameter name="timeout">60</parameter>
+			<parameter name="priority">0</parameter>
+			<!--<parameter name="vm_id">cuckoo1</parameter>-->
+			<parameter name="save_pcap">False</parameter>
+			<parameter name="save_report_json">True</parameter>
+			<parameter name="save_report_html">False</parameter>
+			<parameter name="save_screenshots">True</parameter>
+		</service>
+	</process>
+</workflow>

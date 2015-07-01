@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<workflow name='reporter-webclient'>
+	<process id="main">
+		<service name="object-feeder" id="feed">
+			<parameter name="uri">file.txt</parameter>
+			<output process="report"/>
+		</service>
+	</process>
+	<process id="report">
+		<service name="webclient" id="webclient0" />
+		<service name="reporter">
+			<parameter name="serviceName">webclient</parameter>
+			<parameter name="template">webclient.jsont</parameter>
+		</service>
+	</process>
+</workflow>

@@ -1,0 +1,15 @@
+{
+	"attrs":[
+		{
+			"name":"type",
+			"type":"STRING",
+			"data_string":"url"
+		},
+		{
+			"name":"url_original",
+			"type":"STRING",
+			"data_string":"http://www.google.com/"
+		}
+	],
+	"id":1
+}

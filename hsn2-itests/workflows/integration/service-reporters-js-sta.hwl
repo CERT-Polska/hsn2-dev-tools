@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<workflow name='reporter-js-sta'>
+	<process id="main">
+		<service name="object-feeder" id="feed">
+			<parameter name="uri">file.txt</parameter>
+			<output process="report"/>
+		</service>
+	</process>
+	<process id="report">
+		<service name="js-sta" id="js-sta0" />
+		<service name="reporter">
+			<parameter name="serviceName">js-sta</parameter>
+			<parameter name="template">js-sta.jsont</parameter>
+		</service>
+	</process>
+</workflow>

@@ -1,0 +1,13 @@
+{
+	"attrs":[
+		{
+			"name":"content",
+			"type":"BYTES",
+			"data_bytes":{
+				"key":"/tmp/tests/resources/yara/dump.pcap",
+				"store":0
+			}
+		}
+	],
+	"id":1
+}

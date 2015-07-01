@@ -1,0 +1,15 @@
+{
+    "attrs":[
+        {
+            "name":"type",
+            "type":"STRING",
+            "data_string":"url"
+        },
+        {
+            "name":"url_original",
+            "type":"STRING",
+            "data_string":"http://localhost"
+        }
+    ],
+    "id":49
+}

@@ -1,0 +1,28 @@
+<?xml version="1.0"?>
+<workflow>
+	<process id="main">
+		<service name="feeder-list" id="feeder1">
+			<parameter name="uri">file.txt</parameter>
+			<parameter name="domain_info">true</parameter>
+			<output process="process_url" />
+		</service>
+	</process>
+	<process id="process_url">
+		<conditional expr="#this.depth > 1">
+			<true/>
+			<false>
+				<service name="webclient" id="webclient0">
+					<output process="process_url" />
+				</service>
+				<parallel>
+					<thread>
+						<service name="js-sta" id="js-sta0" />
+					</thread>
+					<thread>
+						<service name="swf-cve" id="swf-cve0"/>
+					</thread>
+				</parallel>
+			</false>
+		</conditional>
+	</process>
+</workflow>

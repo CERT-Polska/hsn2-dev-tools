@@ -1,0 +1,13 @@
+{
+	"attrs":[
+		{
+			"name":"content",
+			"type":"BYTES",
+			"data_bytes":{
+				"key":"/tmp/tests/resources/yara/test-file.txt",
+				"store":0
+			}
+		}
+	],
+	"id":1
+}

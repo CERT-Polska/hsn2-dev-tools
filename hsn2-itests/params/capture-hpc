@@ -1,0 +1,6 @@
+-connector 127.0.0.1 \
+-dataStore http://localhost:8080 \
+-hpcHost localhost \
+-hpcPort 31337 \
+-changesDir /tmp/hpc/changes \
+-urlLogfile /tmp/hpc/url.log

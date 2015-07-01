@@ -1,0 +1,5 @@
+--connector 127.0.0.1 \
+--dataStore http://localhost:8080 \
+--maxThreads 10 \
+--trainingSet /opt/hsn2/js-sta/lib/weka.arff \
+--libPath /opt/hsn2/js-sta/lib/libngrams.so

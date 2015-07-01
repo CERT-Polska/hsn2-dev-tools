@@ -1,0 +1,4 @@
+--connector 127.0.0.1 \
+--dataStore http://localhost:8080 \
+--maxThreads 10 \
+--scdbgPath /opt/hsn2/shell-scdbg/lib/scdbg

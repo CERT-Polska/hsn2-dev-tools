@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<workflow name='rb-officecat1'>
+	<process id="main">
+		<service name="object-feeder" id="feed">
+			<parameter name="uri">file.txt</parameter>
+			<output process="nugproc"/>
+		</service>
+	</process>
+	<process id="nugproc">
+		<service name="rb-officecat" />
+		<service name="reporter">
+			<parameter name="serviceName">rb-officecat</parameter>
+			<parameter name="template">rb-officecat.jsont</parameter>
+		</service>
+	</process>
+</workflow>

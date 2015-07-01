@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<workflow name='rb-swfscanner1'>
+	<process id="main">
+		<service name="object-feeder" id="feed">
+			<parameter name="uri">file.txt</parameter>
+			<output process="nugproc"/>
+		</service>
+	</process>
+	<process id="nugproc">
+		<service name="rb-swfscanner" />
+		<service name="reporter">
+			<parameter name="serviceName">rb-swfscanner</parameter>
+			<parameter name="template">rb-swfscanner.jsont</parameter>
+		</service>
+	</process>
+</workflow>

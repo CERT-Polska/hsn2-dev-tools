@@ -1,0 +1,18 @@
+{
+    "attrs":[
+        {
+            "name":"content",
+            "type":"BYTES",
+            "data_bytes":{
+                "key":"/tmp/tests/resources/files/maliciousCVE-2008-4841.doc",
+                "store":0
+            }
+        },
+        {
+            "name":"type",
+            "type":"STRING",
+            "data_string":"swf"
+        }
+    ],
+    "id":49
+}
