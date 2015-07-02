@@ -46,7 +46,7 @@ for i in ${WORKSPACE}/debian/*.deb; do
     if [ "${ARCH}" == "all" ]; then
         ARCH="amd64"
     fi
-    if [ `reprepro list ${DIST} | grep ${PACKAGE} | grep ${VERSION} | grep -c ${ARCH}` == 0 ]; then
+    if [ `reprepro list ${DIST} ${PACKAGE} | grep ${VERSION} | grep -c ${ARCH}` == 0 ]; then
         dpkg-sig -s origin -v -k ${SIGNKEY} ${i}
         reprepro includedeb ${DIST} ${i}
     else
