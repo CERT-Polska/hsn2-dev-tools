@@ -28,9 +28,12 @@ def get_job_data(prefix='/'):
 def get_artifacts_list(job_name, build='lastSuccessfulBuild'):
     artifacts = []
     upstream_job_path = u'job/%s/%s' % (job_name, build)
-    d = get_json(conn, upstream_job_path + '/api/json', prefix=url)
-    for artifact in d['artifacts']:
-        artifacts.append(u'%s%s/artifact/%s' % (sys.argv[1], upstream_job_path, artifact['relativePath']))
+    try:
+        d = get_json(conn, upstream_job_path + '/api/json', prefix=url)
+        for artifact in d['artifacts']:
+            artifacts.append(u'%s%s/artifact/%s' % (sys.argv[1], upstream_job_path, artifact['relativePath']))
+    except json.scanner.JSONDecodeError:
+        print "ERROR: Gathering list of artifacts from job ", job_name, 'failed!'
     return artifacts
 
 if __name__ == '__main__':
@@ -55,3 +58,4 @@ if __name__ == '__main__':
         fp = open('download-list-%s' % (sys.argv[3]), 'w')
         fp.write(u'\n'.join(artifacts).encode('utf-8'))
         fp.close()
+    print "Gathering list of artifacts finished."
