@@ -43,10 +43,10 @@ for i in ${WORKSPACE}/debian/*.deb; do
     PACKAGE=`dpkg-deb -f ${i} Package`
     VERSION=`dpkg-deb -f ${i} Version`
     ARCH=`dpkg-deb -f ${i} Architecture`
-    if [ "${ARCH}" != "all" ]; then
-        EXTRA=" | grep ${ARCH}"
+    if [ "${ARCH}" == "all" ]; then
+        ARCH="amd64"
     fi
-    if [ `reprepro list ${DIST} | grep ${PACKAGE}${EXTRA} | grep -c ${VERSION}` == 0 ]; then
+    if [ `reprepro list ${DIST} | grep ${PACKAGE} | grep ${VERSION} | grep -c ${ARCH}` == 0 ]; then
         dpkg-sig -s origin -v -k ${SIGNKEY} ${i}
         reprepro includedeb ${DIST} ${i}
     else
