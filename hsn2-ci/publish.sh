@@ -39,13 +39,16 @@ fi
 wget -i download-list-${BUILD_NUMBER} -P ${WORKSPACE}/debian
 
 cd ${REPO}
-for i in *.deb; do
+for i in ${WORKSPACE}/debian/*.deb; do
     PACKAGE=`dpkg-deb -f ${i} Package`
     VERSION=`dpkg-deb -f ${i} Version`
     ARCH=`dpkg-deb -f ${i} Architecture`
-    if [ `reprepro list ${DIST} | grep ${PACKAGE} | grep ${VERSION} | grep -c ${ARCH}` == 0 ]; then
-        dpkg-sig -s origin -v -k ${SIGNKEY} ${WORKSPACE}/debian/$i
-        reprepro includedeb ${DIST} ${WORKSPACE}/debian/$i
+    if [ "${ARCH}" != "all" ]; then
+        EXTRA=" | grep ${ARCH}"
+    fi
+    if [ `reprepro list ${DIST} | grep ${PACKAGE}${EXTRA} | grep -c ${VERSION}` == 0 ]; then
+        dpkg-sig -s origin -v -k ${SIGNKEY} ${i}
+        reprepro includedeb ${DIST} ${i}
     else
         echo "Package ${PACKAGE} already exists in repository in version ${VERSION} or newer. Publishing skipped."
     fi
