@@ -21,6 +21,18 @@ def get_current_job_data(prefix='/'):
     return get_json(conn, 'job/' + sys.argv[2] + '/' + sys.argv[3] + '/api/json', prefix)
 
 
+def get_job_data(prefix='/'):
+    return get_json(conn, 'job/' + sys.argv[2] + '/api/json', prefix)
+
+
+def get_artifacts_list(job_name, build='lastSuccessfulBuild'):
+    artifacts = []
+    upstream_job_path = u'job/%s/%s' % (job_name, build)
+    d = get_json(conn, upstream_job_path + '/api/json', prefix=url)
+    for artifact in d['artifacts']:
+        artifacts.append(u'%s%s/artifact/%s' % (sys.argv[1], upstream_job_path, artifact['relativePath']))
+    return artifacts
+
 if __name__ == '__main__':
     artifacts = []
     params = urllib.urlencode({})
@@ -32,10 +44,12 @@ if __name__ == '__main__':
             continue
         for cause in action['causes']:
             if 'upstreamBuild' in cause:
-                upstream_job_path = u'job/%s/%s' % (cause['upstreamProject'], cause['upstreamBuild'])
-                d = get_json(conn, upstream_job_path + '/api/json', prefix=url)
-                for artifact in d['artifacts']:
-                    artifacts.append(u'%s%s/artifact/%s' % (sys.argv[1], upstream_job_path, artifact['relativePath']))
+                artifacts.extend(get_artifacts_list(cause['upstreamProject'], cause['upstreamBuild']))
+    if not artifacts:
+        print "Job was probably started by user and not caused by upstream, gathering all upstream artifacts..."
+        data = get_job_data(prefix=url)
+        for project in data['upstreamProjects']:
+            artifacts.extend(get_artifacts_list(project['name']))
     conn.close()
     if artifacts:
         fp = open('download-list-%s' % (sys.argv[3]), 'w')
