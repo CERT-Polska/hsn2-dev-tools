@@ -24,9 +24,7 @@ Created on 2012-07-13
 '''
 
 import commons as com
-import sys
-sys.path.append("/opt/hsn2/python/commlib")
-import hsn2objectwrapper as ow
+import hsn2_commons.hsn2objectwrapper as ow
 import logging
 
 class YaraIntegrationTest(com.TestCaseVerbose):

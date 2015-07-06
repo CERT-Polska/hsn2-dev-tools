@@ -27,9 +27,9 @@ import time
 import urllib
 import urllib2
 import xml.dom.minidom
-sys.path.append("/opt/hsn2/python/commlib")
-from loggingSetup import logging, setupLogging
-import hsn2objectwrapper as ow
+
+from hsn2_commons.loggingSetup import logging, setupLogging
+import hsn2_commons.hsn2objectwrapper as ow
 
 class BackupException(Exception):
 	'''

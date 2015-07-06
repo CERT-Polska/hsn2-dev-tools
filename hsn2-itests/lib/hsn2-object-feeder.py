@@ -23,14 +23,13 @@ Created on 19-04-2012
 @author: wojciechm
 '''
 import sys
-sys.path.append("/opt/hsn2/python/commlib")
-from hsn2taskprocessor import HSN2TaskProcessor
-from hsn2taskprocessor import ParamException, ProcessingException
-from hsn2osadapter import ObjectStoreException
-from hsn2dsadapter import DataStoreException
-import hsn2objectwrapper as ow
-from hsn2service import HSN2Service
-from hsn2service import startService
+from hsn2_commons.hsn2taskprocessor import HSN2TaskProcessor
+from hsn2_commons.hsn2taskprocessor import ParamException, ProcessingException
+from hsn2_commons.hsn2osadapter import ObjectStoreException
+from hsn2_commons.hsn2dsadapter import DataStoreException
+import hsn2_commons.hsn2objectwrapper as ow
+from hsn2_commons.hsn2service import HSN2Service
+from hsn2_commons.hsn2service import startService
 import os
 import logging
 

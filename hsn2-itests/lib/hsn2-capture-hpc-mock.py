@@ -31,8 +31,7 @@ import sys
 import threading
 import time
 
-sys.path.append("/opt/hsn2/python/commlib")
-from hsn2service import HSN2Service, startService
+from hsn2_commons.hsn2service import HSN2Service, startService
 from multiprocessing import Process
 
 '''

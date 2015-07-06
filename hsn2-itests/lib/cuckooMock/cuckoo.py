@@ -29,8 +29,7 @@ from cuckoo.config.config import CuckooConfig
 from cuckoo.config.constants import *
 from cuckoo.core.db import CuckooDatabase
 
-sys.path.append("/opt/hsn2/python/commlib")
-import loggingSetup
+import hsn2_commons.loggingSetup as loggingSetup
 
 class Analysis(Thread):
 	"""
