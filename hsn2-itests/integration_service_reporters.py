@@ -46,7 +46,7 @@ class ServiceReportersIntegrationTest(com.TestCaseVerbose):
 		time.sleep(5)
 		couchdb.Server().delete('hsn')
 		com.Starter.initStart("hsn2-framework")
-		com.Starter.initStart("hsn2-object-store")
+		com.Starter.initStart("hsn2-object-store-mongodb")
 		com.Starter.initStart("hsn2-data-store")
 		com.Starter.initStart("hsn2-object-feeder")
 		com.Configuration.setConsoleConf(host="127.0.0.1", port=5672, timeout=4)

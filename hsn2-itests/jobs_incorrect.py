@@ -48,7 +48,7 @@ class JobsIncorrectIntegrationTest(unittest.TestCase):
 		self.assertIn("The job has been rejected. The reason is 'Error running workflow XXX'.", ret[1], "The job should be rejected.")
 
 	def testJobAcceptedAborted(self):
-		com.Starter.initStart("hsn2-object-store")
+		com.Starter.initStart("hsn2-object-store-mongodb")
 		com.Starter.initStart("hsn2-data-store")
 		com.Starter.initStart("hsn2-file-feeder")
 
@@ -66,7 +66,7 @@ class JobsIncorrectIntegrationTest(unittest.TestCase):
 		self.assertRegexpMatches(ret[1], r'id:\s+%s\s+status:\s+ABORTED' % jobId, "The job should be aborted.")
 
 	def testJobWithParamsAcceptedAborted(self):
-		com.Starter.initStart("hsn2-object-store")
+		com.Starter.initStart("hsn2-object-store-mongodb")
 		com.Starter.initStart("hsn2-data-store")
 		com.Starter.initStart("hsn2-file-feeder")
 

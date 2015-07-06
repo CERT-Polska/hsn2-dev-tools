@@ -39,7 +39,7 @@ class ComponentStartupCorrectIntegrationTest(unittest.TestCase):
 	def _testHelper(self, service):
 		com.Starter.initStart("hsn2-framework")
 		time.sleep(2)
-		com.Starter.initStart("hsn2-object-store")
+		com.Starter.initStart("hsn2-object-store-mongodb")
 		com.Starter.initStart("hsn2-data-store")
 		time.sleep(2)
 		com.Starter.initStart("hsn2-%s" % service)

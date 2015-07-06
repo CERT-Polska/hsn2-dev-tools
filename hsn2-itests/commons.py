@@ -1080,7 +1080,7 @@ if __name__ == "__main__":
 		Starter.initCouchDB()
 		Starter.initRabbitMQ()
 		Starter.initStart("hsn2-framework")
-		Starter.initStart("hsn2-object-store")
+		Starter.initStart("hsn2-object-store-mongodb")
 		Starter.initStart("hsn2-data-store")
 		Starter.initStart("hsn2-swf-cve")
 		Starter.initStart("hsn2-js-sta")

@@ -37,7 +37,7 @@ class ConsoleIntegrationTest(unittest.TestCase):
 		com.Configuration.resetJobCounter()
 		com.Configuration.setServices(["object-feeder","webclient","reporter"])
 		com.Starter.initStart("hsn2-framework")
-		com.Starter.initStart("hsn2-object-store")
+		com.Starter.initStart("hsn2-object-store-mongodb")
 		com.Configuration.setWorkflow("/tmp/tests/workflows/minimal/stub.hwl")
 		com.Configuration.setConsoleConf(host="127.0.0.1", port=5672, timeout=4)
 

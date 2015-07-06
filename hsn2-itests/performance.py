@@ -44,7 +44,7 @@ class PerformanceTest(com.TestCaseVerbose):
 		com.Starter.initCouchDB()
 		com.Configuration.setServices(["feeder-list", "webclient", "swf-cve", "shell-scdbg", "js-sta", "reporter", "norm-url"])
 		com.Starter.initStart("hsn2-framework")
-		com.Starter.initStart("hsn2-object-store")
+		com.Starter.initStart("hsn2-object-store-mongodb")
 		com.Starter.initStart("hsn2-data-store")
 		com.Starter.initStart("hsn2-file-feeder")
 		com.Starter.initStart("hsn2-webclient")

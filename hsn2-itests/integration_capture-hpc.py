@@ -43,7 +43,7 @@ class CaptureHPCIntegrationTest(com.TestCaseVerbose):
 		#com.Configuration.setServices(["object-feeder","feeder-list", "webclient", "js-sta", "shell-scdbg", "swf-cve", "reporter"])
 		#com.Configuration.resetJobCounter()
 		#com.Starter.initStart("hsn2-framework")
-		#com.Starter.initStart("hsn2-object-store")
+		#com.Starter.initStart("hsn2-object-store-mongodb")
 		#com.Starter.initStart("hsn2-data-store")
 		#com.Starter.initStart("hsn2-object-feeder")
 		#com.Starter.initStart("hsn2-capture-hpc")

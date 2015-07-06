@@ -39,7 +39,7 @@ class SimpleJobIntegrationTest(com.TestCaseVerbose):
 		com.Website("/tmp/tests/workflows/simple",80)
 		com.Starter.initCouchDB(wait=True)
 		com.Starter.initStart("hsn2-framework")
-		com.Starter.initStart("hsn2-object-store")
+		com.Starter.initStart("hsn2-object-store-mongodb")
 		com.Starter.initStart("hsn2-data-store")
 		com.Starter.initStart("hsn2-file-feeder")
 		com.Starter.initStart("hsn2-webclient")

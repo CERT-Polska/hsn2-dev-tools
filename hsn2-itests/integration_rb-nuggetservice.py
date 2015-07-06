@@ -40,7 +40,7 @@ class NuggetServiceIntegrationTest(com.TestCaseVerbose):
 		self.addCleanup(self.testHelp.done)
 		com.Starter.initStop("rabbitmq-server")
 		com.Starter.initStop("hsn2-framework")
-		com.Starter.initStop("hsn2-object-store")
+		com.Starter.initStop("hsn2-object-store-mongodb")
 		com.Starter.initStop("hsn2-data-store")
 		com.Starter.initStop("hsn2-object-feeder")
 		com.Starter.initStop("hsn2-rb-swfscanner")
@@ -132,7 +132,7 @@ class NuggetServiceIntegrationTest(com.TestCaseVerbose):
 		'''
 		com.Starter.initRabbitMQ()
 		com.Starter.initStart("hsn2-framework")
-		com.Starter.initStart("hsn2-object-store")
+		com.Starter.initStart("hsn2-object-store-mongodb")
 		com.Starter.initStart("hsn2-data-store")
 		com.Starter.initStart("hsn2-object-feeder")
 
@@ -160,7 +160,7 @@ class NuggetServiceIntegrationTest(com.TestCaseVerbose):
 		'''
 		com.Starter.initRabbitMQ()
 		com.Starter.initStart("hsn2-framework")
-		com.Starter.initStart("hsn2-object-store")
+		com.Starter.initStart("hsn2-object-store-mongodb")
 		com.Starter.initStart("hsn2-data-store", autoStop = False)
 		com.Starter.initStart("hsn2-object-feeder")
 		com.Configuration.setWorkflow("/tmp/tests/workflows/nuggets/rb-swfscanner1.hwl")
@@ -185,13 +185,13 @@ class NuggetServiceIntegrationTest(com.TestCaseVerbose):
 		'''
 		com.Starter.initRabbitMQ()
 		com.Starter.initStart("hsn2-framework")
-		com.Starter.initStart("hsn2-object-store", autoStop = False)
+		com.Starter.initStart("hsn2-object-store-mongodb", autoStop = False)
 		com.Starter.initStart("hsn2-data-store")
 		com.Starter.initStart("hsn2-object-feeder")
 		com.Configuration.setWorkflow("/tmp/tests/workflows/nuggets/rb-swfscanner1.hwl")
 		com.Console.submitJob("rb-swfscanner1 feed.uri=/tmp/tests/resources/json/rb-swfscanner-benign.json")
 		time.sleep(1)
-		com.Starter.initStop("hsn2-object-store")
+		com.Starter.initStop("hsn2-object-store-mongodb")
 		time.sleep(1)
 		com.Starter.initStart("hsn2-rb-swfscanner")
 		logging.info("Waiting for object connector timeouts."); time.sleep(18)
