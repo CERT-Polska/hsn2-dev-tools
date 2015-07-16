@@ -26,7 +26,7 @@ Created on 2012-05-10
 import commons as com
 import logging
 import couchdb
-from jsonpath import jsonpath
+#from jsonpath import jsonpath
 
 class SimpleJobIntegrationTest(com.TestCaseVerbose):
 	testHelp = None
