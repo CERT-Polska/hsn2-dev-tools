@@ -1,5 +1,7 @@
 internal:
+	cp -r -p configurations ${IMGSRC}/
 	docker build --no-cache --force-rm -t ${IMGNAME} ${IMGSRC}
+	rm -r ${IMGSRC}/configurations
 
 base:
 	IMGNAME=hsn2/base IMGSRC=HSN2Base make internal
@@ -28,7 +30,7 @@ thug:
 jssta: 
 	IMGNAME=hsn2/jssta IMGSRC=JSSta make internal
 
-console: base
+console:
 	IMGNAME=hsn2/console IMGSRC=Console make internal
 
 images: framework objectstore datastore feeders webclient reporter thug jssta console

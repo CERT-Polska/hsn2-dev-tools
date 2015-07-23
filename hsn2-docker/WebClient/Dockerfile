@@ -1,7 +1,8 @@
 FROM hsn2/base
 
-# Configure the database
-RUN apt-get update && apt-get install -y --no-install-recommends hsn2-webclient
+COPY configurations /tmp/configurations
+
+RUN /tmp/configurations/setup.sh hsn2-webclient
 
 COPY start.sh /start.sh
 
