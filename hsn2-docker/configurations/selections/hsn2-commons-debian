@@ -1,2 +1,2 @@
 hsn2-commons-debian hsn2/broker string framework
-hsn2-commons-debian hsn2/datastore string datastore
+hsn2-commons-debian hsn2/datastore string datastore:8080
