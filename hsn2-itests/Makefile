@@ -1,15 +1,19 @@
-# TODO: make commented code below work to allow easy disabling of particular test suites
-#TESTS=""
-#TESTS="${TESTS} component_startup_correct.py"
-#TESTS="${TESTS} component_startup_incorrect.py"
-#TESTS="${TESTS} console.py"
-#TESTS="${TESTS} ping.py"
-#TESTS="${TESTS} workflows.py"
-#TESTS="${TESTS} jobs_incorrect.py"
-#TESTS="${TESTS} jobs_correct.py"
-#TESTS="${TESTS} simple_job_processing.py"
-#TESTS=component_*.py console.py ping.py workflows.py jobs_*.py simple_job_processing.py integration_js-sta.py integration_process_reporters.py integration_service_reporters.py integration_shell-scdbg.py integration_swf-cve.py integration_webclient.py integration_capture-hpc.py integration_thug.py integration_cuckoo.py integration_yara.py
-TESTS=component_*.py console.py ping.py workflows.py jobs_*.py simple_job_processing.py integration_js-sta.py integration_process_reporters.py integration_service_reporters.py integration_shell-scdbg.py integration_swf-cve.py integration_webclient.py integration_capture-hpc.py integration_thug.py integration_yara.py
+TESTS = component_*.py
+TESTS += console.py
+TESTS += ping.py
+TESTS += workflows.py
+TESTS += jobs_*.py
+TESTS += simple_job_processing.py
+TESTS += integration_js-sta.py
+TESTS += integration_process_reporters.py
+TESTS += integration_service_reporters.py
+TESTS += integration_shell-scdbg.py
+TESTS += integration_swf-cve.py
+TESTS += integration_webclient.py
+TESTS += integration_capture-hpc.py
+TESTS += integration_thug.py
+#TESTS += integration_cuckoo.py
+TESTS += integration_yara.py
 
 tests:  clean
 	@mkdir -p out
